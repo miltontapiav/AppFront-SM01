@@ -1,0 +1,13 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <h2 class="active"> Inicio de Sesión </h2>
+        <div class="contenedor">
+            <img src="assets/images/logo_metrogas.png" alt="Logo de Metrogas">
+        </div>
+        <form>
+            <input type="text"  class="fadeIn second" #username="ngModel" [(ngModel)]="Modelo.username" placeholder="Usuario" name="username" pattern="[0-9]+" (input)="showAlert(username)">
+            <input type="password" class="fadeIn third" placeholder="Contraseña" name="password" #password required>
+        </form>
+        <input type="submit" class="fadeIn fourth" value="Log in" (click)="AuthService.login(username.value, password.value)">
+    </div>
+</div>

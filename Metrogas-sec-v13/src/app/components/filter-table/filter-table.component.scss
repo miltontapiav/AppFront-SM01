@@ -1,0 +1,75 @@
+.buscador-container {
+    background-color: #3498db;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    margin: 20px auto;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.filtrar {
+    background-color: #1e6eb5;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.buscador-container-btn {
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.logout {
+    background-color: #1e6eb5;
+    padding: 20px;
+    color: white;
+    border-radius: 8px;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    margin-right: 20px;
+    align-self: flex-end;
+}
+
+.invalid {
+    border: 1px solid red;
+}

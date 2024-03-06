@@ -1,0 +1,75 @@
+div {
+  margin: 20px;
+}
+
+h4 {
+  color: #3498db;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #3498db;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #3498db;
+  color: #fff;
+  font-weight: 500;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #dff9fb;
+}
+
+.table-container {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.readonly {
+  background-color: #f2f2f2; 
+  color: #333; 
+}
+
+.button-container-timer-back {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.logout {
+  background-color: #3498db;
+  padding: 20px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin-right: 20px;
+  align-self: flex-end;
+}
+
+.text-danger {
+  color: red;
+}
+
+.modal-content {
+  overflow-y: auto;
+  max-height: 600px;
+}

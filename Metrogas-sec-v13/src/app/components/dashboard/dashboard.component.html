@@ -1,0 +1,40 @@
+<div *ngIf="incidentData">
+    <div class="button-container-timer-back">
+        <div>{{ formattedCountdown }} <---- Tiempo para que termine tu sesión</div>
+        <button class="logout" (click)="logout()">Cerrar Sesión</button>
+    </div>
+    <div class="buscador-container">
+        <h1>Tabla de Incidentes</h1>
+        <div>Para acceder a la opción editar, haga click sobre el Nº Cliente</div>
+    </div>
+    <table *ngIf="incidentData.length > 0" class="table">
+        <thead>
+            <tr>
+                <th *ngFor="let header of incidentHeaders">{{ header }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let incident of incidentData | paginate: { itemsPerPage: pItemsPerPage, currentPage: page }">
+                <ng-container *ngFor="let key of incidentKeys; let firstCol = first">
+                    <td [ngClass]="{'selected': isRowSelected && firstCol}">
+                        <div *ngIf="firstCol" (mouseenter)="selectRow(incident)" (click)="openEditModal()" style="cursor: pointer">
+                            {{ incident.nroCliente }}
+                        </div>
+                        <div *ngIf="(key !== 'urlPDF' && key !== 'urlXML'); else linkCell">
+                            {{ incident[key] }}
+                        </div>
+                        <ng-template #linkCell>
+                            <a [href]="incident[key]" target="_blank">Ver PDF</a>
+                        </ng-template>
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <button (click)="descargarExcel()" class="descargar-btn">Descargar Excel</button>
+
+    <div class="pagination">
+        <pagination-controls (pageChange)="onPageChange($event)"></pagination-controls>
+    </div>
+</div>

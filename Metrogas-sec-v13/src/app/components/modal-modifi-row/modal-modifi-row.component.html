@@ -1,0 +1,103 @@
+<div class="modal-dialog modal-dialog-scrollable" role="document" [ngClass]="{'modal-lg': isLargeModal}">
+  <div class="modal-content">
+    <div class="modal-header">
+      <div class="button-container-timer-back">
+        <h4 class="modal-title">Editar Incidente: {{ idIncidenteHeader }}</h4>
+        <button class="logout" (click)="logout()">Cerrar Sesión</button>
+      </div>
+      <div>{{ formattedCountdown }} <---- Tiempo para que termine tu sesión</div>
+      <h3>
+        Recordar que los elementos con 
+        <span class="text-danger">*</span> 
+        en su costado son de carácter obligatorio para la SEC
+      </h3>                
+      <!--
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      -->
+    </div>
+    <div class="modal-body">
+      <div class="table-container">
+        <table class="table">
+          <tbody>
+            <ng-container *ngFor="let key of incidentKeys; let i = index">
+              <tr>
+                <ng-container *ngIf="i < incidentHeaders.length">
+                  <th>{{ incidentHeaders[i] }}</th>
+                </ng-container>
+                <td>
+                  <ng-container *ngIf="key !== 'urlPDF' && key !== 'urlXML'; else linkCell">
+                    {{ incident[key] }}
+                  </ng-container>
+                  <ng-template #linkCell>
+                    <a [href]="incident[key]" target="_blank">
+                        Ver PDF
+                    </a>
+                  </ng-template>
+                </td>
+                <!--
+                <td *ngIf="formIncident.controls[key]" [ngClass]="{ 'readonly': isReadOnly(key) }">
+                  <ng-container *ngIf="!isReadOnly(key); else readOnlyContent">
+                    <form [formGroup]="formIncident">
+                      <input [formControlName]="key" class="form-control" [type]="isDateField(key) ? 'date' : 'text'" [pattern]="getPattern(key)" [required]="isRequiredField(key)" />
+                      <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.required">
+                        <span class="error-message">Campo requerido</span>
+                      </div>
+                      <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.maxLength">
+                        <span class="error-message">Máximo 20 caracteres permitidos</span>
+                      </div>
+                      <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.pattern">
+                        <span class="error-message">Valor no válido</span>
+                      </div>
+                    </form>
+                  </ng-container>
+                  <ng-template #readOnlyContent>
+                    {{ incident[key] }}
+                  </ng-template>
+                </td>
+                -->
+                <td *ngIf="formIncident.controls[key]" [ngClass]="{ 'readonly': isReadOnly(key) }">
+                  <ng-container *ngIf="!isReadOnly(key); else readOnlyContent">
+                    <form [formGroup]="formIncident">
+                      <ng-container *ngIf="isComboBoxField(key); else inputField">
+                        <select [formControlName]="key" class="form-control">
+                          <option *ngFor="let option of getOptionsByKey(key)" [value]="option.value">{{ option.label }}</option>
+                        </select>
+                      </ng-container>
+                      <ng-template #inputField>
+                        <input [formControlName]="key" class="form-control" [type]="isDateField(key) ? 'date' : 'text'" [pattern]="getPattern(key)" [required]="isRequiredField(key)" />
+                        <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.required">
+                          <span class="error-message">Campo requerido</span>
+                        </div>
+                        <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.maxLength">
+                          <span class="error-message">Máximo 20 caracteres permitidos</span>
+                        </div>
+                        <div *ngIf="formIncident.get(key).errors && formIncident.get(key).errors.pattern">
+                          <span class="error-message">Valor no válido</span>
+                        </div>
+                      </ng-template>
+                    </form>
+                  </ng-container>
+                  <ng-template #readOnlyContent>
+                    {{ incident[key] }}
+                  </ng-template>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+      <button type="button" class="btn btn-primary" (click)="guardarCambios(incident)" [disabled]="!camposObligatoriosCompletados()">Enviar Cambios</button>
+      <br>
+      <h3>
+        Para enviar, completar campos con 
+        <span class="text-danger">*</span>
+      </h3> 
+    </div>
+  </div>
+</div>
